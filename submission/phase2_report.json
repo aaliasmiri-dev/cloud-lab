@@ -1,0 +1,30 @@
+{
+  "phase": "2",
+  "environment": {
+    "colab": true
+  },
+  "attention": {
+    "naive_ms": 393.205,
+    "vectorized_ms": 0.962,
+    "speedup": 408.74
+  },
+  "threads": {
+    "1": 2830.249,
+    "2": 2007.56,
+    "4": 2118.998,
+    "8": 2135.875
+  },
+  "devices": {
+    "cpu_ms": 416782.0,
+    "gpu_ms": 13440.7
+  },
+  "training": {
+    "steps": 2000,
+    "final_loss": 1.4256,
+    "param_count": 4935680
+  },
+  "sample": "\nNagel;\nOn ye not oble of stoptitic\nI prest offes, ship show you not out in in my here.\n\nLord Citizen:\nCorio\ufffdus for scand my frosteal that laces;\nAnd not, of the done in the poorm and spear:\nHe never I",
+  "model": {
+    "gcs_url": "https://storage.googleapis.com/project-0d4f753e-ba8c-49c2-ba5-eurecomgpt/model.safetensors"
+  }
+}
