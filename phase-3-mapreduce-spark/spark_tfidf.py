@@ -22,29 +22,17 @@ from mapreduce import tokenize   # reuse the same tokenizer as the MapReduce wor
 
 
 def term_freq(docs_rdd):
-    """TF stage. Input RDD of ``(doc_id, text)``; return RDD of ``((term, doc_id), tf)``.
-
-    Emit a ``((term, doc_id), 1)`` for every token (use ``tokenize``), then sum per key.
-    """
-    # TODO: flatMap each (doc_id, text) to ((term, doc_id), 1) pairs via tokenize(text),
-    #       then reduceByKey to sum the counts.
-     return (docs_rdd
-        .flatMap(lambda d: [((t, d[0]), 1) for t in tokenize(d[1])])
-        .reduceByKey(lambda a, b: a + b))
-    raise NotImplementedError("Phase 3: implement term_freq()")
+    """TF stage. Input RDD of ``(doc_id, text)``; return RDD of ``((term, doc_id), tf)``."""
+    return (docs_rdd
+            .flatMap(lambda d: [((t, d[0]), 1) for t in tokenize(d[1])])
+            .reduceByKey(lambda a, b: a + b))
 
 
 def doc_freq(tf_rdd):
-    """DF stage. Input RDD of ``((term, doc_id), tf)``; return RDD of ``(term, df)``.
-
-    Each ``(term, doc_id)`` key is one document containing the term, so map to
-    ``(term, 1)`` and sum per term.
-    """
-    # TODO: map each ((term, doc_id), tf) to (term, 1), then reduceByKey to get (term, df).
+    """DF stage. Input RDD of ``((term, doc_id), tf)``; return RDD of ``(term, df)``."""
     return (tf_rdd
-        .map(lambda kv: (kv[0][0], 1))
-        .reduceByKey(lambda a, b: a + b))
-    raise NotImplementedError("Phase 3: implement doc_freq()")
+            .map(lambda kv: (kv[0][0], 1))
+            .reduceByKey(lambda a, b: a + b))
 
 
 def build_tfidf_rdd(docs_rdd, num_docs: int):
